@@ -81,6 +81,11 @@ def test_non_string_country_code_raises_type_error():
         normalize_phone("030 1234567", 49)
 
 
+def test_overlong_country_code_raises_value_error():
+    with pytest.raises(ValueError):
+        normalize_phone("030 1234567", "D" * 4097)
+
+
 def test_error_message_never_contains_input_value():
     secret = "030 1234567"
     with pytest.raises(ValueError) as exc_info:

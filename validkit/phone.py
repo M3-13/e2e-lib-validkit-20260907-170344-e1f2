@@ -57,6 +57,8 @@ def normalize_phone(text: str, country_code: str) -> str:
     if not isinstance(country_code, str):
         raise TypeError("country_code must be a string")
 
+    _reject_overlong(country_code)
+
     key = country_code.strip().upper()
     prefix = _COUNTRY_CODES.get(key)
     if prefix is None:
